@@ -52,10 +52,10 @@
                 />
 
                 <vs-row class="mt-8">
-                  <vs-col vs-w="6">
+                  <vs-col vs-lg="6" class="p-0">
                     <vs-button :to="{ name: 'login'}" type="border">Voltar</vs-button>
                   </vs-col>
-                  <vs-col vs-w="6">
+                  <vs-col vs-lg="6" class="p-0">
                     <vs-button
                     class="float-right"
                     @click.prevent="submitForm"
