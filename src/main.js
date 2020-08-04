@@ -52,6 +52,10 @@ require('./assets/css/iconfont.css')
 import VeeValidate from 'vee-validate';
 Vue.use(VeeValidate);
 
+// local storage
+import VueLocalStorage from 'vue-localstorage'
+Vue.use (VueLocalStorage)
+
 
 Vue.config.productionTip = false
 

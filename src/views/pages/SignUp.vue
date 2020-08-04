@@ -11,7 +11,7 @@
               <div class="p-8">
                 <div class="vx-card__title flex flex-col items-center mb-8">
                   <h4 class="mb-4">Cadastrar</h4>
-                  <p>Bora começar a gerenciar seu dinheiro?!</p>
+                  <p>Se cadastre para poder logar no sistema.</p>
                 </div>
                 <vs-input
                   type="mail"
@@ -51,14 +51,17 @@
                   :danger-text="errors.first('password')"
                 />
 
-                <div class="mt-8">
-                  <vs-button
-                    class="w-full"
-                    to="/"
-                    type="border"
-                    @click.prevent="cadastrar"
+                <vs-row class="mt-8">
+                  <vs-col vs-w="6">
+                    <vs-button :to="{ name: 'login'}" type="border">Voltar</vs-button>
+                  </vs-col>
+                  <vs-col vs-w="6">
+                    <vs-button
+                    class="float-right"
+                    @click.prevent="submitForm"
                   >Cadastrar</vs-button>
-                </div>
+                  </vs-col>
+                </vs-row>
               </div>
             </div>
           </div>
@@ -67,3 +70,58 @@
     </div>
   </div>
 </template>
+
+<script>
+import { Validator } from "vee-validate";
+import utils from "@/assets/utils";
+
+const dict = {
+  custom: {
+    mail:{
+      required: "O username é obrigatório!",
+    },
+
+    username: {
+      required: "O username é obrigatório!",
+    },
+    password: {
+      required: "A senha é obrigatória!",
+    },
+  },
+};
+
+Validator.localize("pt", dict);
+
+export default {
+  data() {
+    return {
+      mail: "",
+      username: "",
+      password: ""
+    };
+  },
+
+  methods:{
+    async submitForm(){
+      var valido = 0;
+
+      var result = await utils.validar(this.$validator);
+      if (!result) valido++;
+
+      if (valido == 0) {
+        this.cadastrar();
+      }else{
+        this.$vs.notify({
+          color: "danger",
+          title: "Erro",
+          text: "Algum dos campos está com erro, verifique e tente novamente",
+        });
+      }
+    },
+
+    cadastrar(){
+
+    }
+  }
+}
+</script>

@@ -83,7 +83,7 @@ export default {
 
   mounted() {
     if (this.$localStorage.get("login_is_remember_me")) {
-      this.userName = this.$localStorage.get("login_userName");
+      this.username = this.$localStorage.get("login_userName");
       this.password = this.$localStorage.get("login_password");
       this.lembre_me = this.$localStorage.get("login_is_remember_me");
     }
@@ -99,38 +99,58 @@ export default {
 
       if (valido == 0) {
         this.login();
+      }else{
+        this.$vs.notify({
+          color: "danger",
+          title: "Erro",
+          text: "Algum dos campos está com erro, verifique e tente novamente",
+        });
       }
     },
 
     async login() {
-      this.errorMessage = null;
-
-      this.remember_me();
+      // this.remember_me();
 
       this.$vs.loading();
-      var response = await api_login.login(this.userName, this.password);
-      this.$vs.loading.close();
 
-      if (response && response.data) {
-        if (response.data.authenticated) {
-          this.$acl.change("admin");
-          this.$localStorage.set("login_token", response.data.accessToken);
-          this.$localStorage.set("login_rules", response.data.rules);
-          this.$localStorage.set("login_expiration", response.data.expiration);
-          this.home();
-        } else {
-          this.errorMessage = "Nome ou a senha, são inválidos!";
-        }
-      } else {
+      api_login.login(this.username, this.password)
+      .then(response => {
+        debugger;
+        this.$vs.loading.close();
+        console.log(response);
+
+        this.$vs.notify({
+          color: "success",
+          title: "Login",
+          text: "Login efetuado com sucesso!",
+        });
+
+        this.$router.push({name: "home"});
+      })
+      .catch(ex => {
+        debugger;
+        this.$vs.loading.close();
+        console.log(ex);
+
         this.$vs.notify({
           color: "danger",
           title: "Erro",
           text: "Erro ao fazer Login!",
         });
-      }
+      });
     },
-
-    async cadastrar() {},
+    
+    remember_me() {
+      if (this.lembre_me) {
+        this.$localStorage.set("login_is_remember_me", this.lembre_me);
+        this.$localStorage.set("login_userName", this.username);
+        this.$localStorage.set("login_password", this.password);
+      } else {
+        this.lembre_me = this.$localStorage.remove("login_is_remember_me");
+        this.$localStorage.remove("login_userName");
+        this.$localStorage.remove("login_password");
+      }
+    }
   },
 };
 </script>

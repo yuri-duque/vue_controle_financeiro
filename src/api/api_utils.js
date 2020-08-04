@@ -20,19 +20,19 @@ export default {
         return axios.create({})
     },
 
-    async get(path) {
-        return await this.call().get(`${urlApi}/${path}`);
+    get(path) {
+        return this.call().get(`${urlApi}/${path}`);
     },
 
-    async post(path, data) {
-        return await this.call().post(`${urlApi}/${path}`, data);
+    post(path, data) {
+        return this.call().post(`${urlApi}/${path}`, data);
     },
 
-    async put(path, data, id) {
-        return await this.call().put(`${urlApi}/${path}/${id}`, data);
+    put(path, data, id) {
+        return this.call().put(`${urlApi}/${path}/${id}`, data);
     },
 
-    async delete(path) {
-        return await this.call().delete(`${urlApi}/${path}`);
+    delete(path) {
+        return this.call().delete(`${urlApi}/${path}`);
     },
 }

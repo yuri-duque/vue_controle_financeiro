@@ -1,5 +1,4 @@
-const apiUrl = "https://localhost:44388/api";
-// const apiUrl = "https://encartesapi.smartretail.app/api"; 
+const apiUrl = "https://localhost:44324/api";
 const siteUrl =  process.env.VUE_APP_ROOT_SITE;
 const domain = process.env.VUE_APP_DOMAIN;
 const domainApi = process.env.VUE_APP_DOMAIN_API;
