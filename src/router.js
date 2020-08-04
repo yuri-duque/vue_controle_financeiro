@@ -52,8 +52,8 @@ const router = new Router({
           component: () => import("@/views/pages/Error404.vue")
         },
         {
-          path: "/signup",
-          name: "signup",
+          path: "/cadastro",
+          name: "cadastro-usuario",
           component: () => import("@/views/pages/SignUp.vue")
         }
       ]

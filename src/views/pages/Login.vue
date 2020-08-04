@@ -42,7 +42,7 @@
                   <vs-checkbox v-model="lembre_me" class="mb-3">Lembre-me</vs-checkbox>
                   <router-link to="#">Esqueceu sua senha?</router-link>
                 </div>
-                <vs-button to="/signup" type="border" @click.prevent="cadastrar">Cadastrar</vs-button>
+                <vs-button :to="{ name: 'cadastro-usuario'}" type="border" @click.prevent="cadastrar">Cadastrar</vs-button>
                 <vs-button class="float-right" @click.prevent="submitForm">Login</vs-button>
               </div>
             </div>
