@@ -58,6 +58,10 @@ import 'prismjs/themes/prism-tomorrow.css'
 // Feather font icon
 require('./assets/css/iconfont.css')
 
+// vue validate
+import VeeValidate from 'vee-validate';
+Vue.use(VeeValidate);
+
 
 Vue.config.productionTip = false
 

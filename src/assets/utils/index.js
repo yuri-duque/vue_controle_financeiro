@@ -35,4 +35,14 @@ export default {
 
     return cords
   },
+
+  async validar(validate) {
+    return await validate.validateAll().then(result => {
+      if (!result) {
+        return false;
+      } else {
+        return true;
+      }
+    });
+  }
 }

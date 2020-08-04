@@ -1,25 +1,11 @@
 
 import axios from "axios"
-import config from "../../config.js";
+import config from "@/../config.js";
 const urlApi = config.apiUrl;
 
 axios.defaults.withCredentials = true;
 
 export default {    
-    getError(error) {
-        var data = { success: false, message: "Ocorreu um problema" }
-        if (error != undefined && error.response != undefined) {
-            if (error.response.message != undefined) {
-                data.message = error.response.message;
-            }
-
-            if (error.response.data.message != undefined) {
-                data.message = error.response.data.message;
-            }
-        }
-        return data;
-    },
-
     serializeData(data) {
         return JSON.stringify(data);
     },
@@ -35,41 +21,18 @@ export default {
     },
 
     async get(path) {
-        var promise = this.call().get(`${urlApi}/${path}`)
-            
-        return await this.retorno(promise);
+        return await this.call().get(`${urlApi}/${path}`);
     },
 
     async post(path, data) {
-        var promise = this.call().post(`${urlApi}/${path}`, data)
-            
-        return await this.retorno(promise);
+        return await this.call().post(`${urlApi}/${path}`, data);
     },
 
     async put(path, data, id) {
-        var promise = this.call().put(`${urlApi}/${path}/${id}`, data);    
-
-        return await this.retorno(promise);
+        return await this.call().put(`${urlApi}/${path}/${id}`, data);
     },
 
-    async deletar(path) {
-        var promise = this.call().delete(`${urlApi}/${path}`);
-
-        return await this.retorno(promise);
+    async delete(path) {
+        return await this.call().delete(`${urlApi}/${path}`);
     },
-
-    async retorno(promise){
-        return await promise
-        .then(response => {
-            if (response && response.data) {
-                return { success: true, data: response.data }
-            } else {
-                return { success: false }
-            }
-        })
-        .catch(error => {
-            console.log(error);
-            return { success: false }
-        });
-    }
 }
