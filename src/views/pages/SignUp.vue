@@ -1,0 +1,69 @@
+<template>
+  <div
+    class="h-screen flex w-full bg-img vx-row no-gutter items-center justify-center"
+    id="page-login"
+  >
+    <div class="vx-col sm:m-0 m-4">
+      <vx-card>
+        <div slot="no-body" class="full-page-bg-color">
+          <div class="vx-row no-gutter justify-center items-center">
+            <div class="vx-col sm:w-full md:w-full d-theme-dark-bg">
+              <div class="p-8">
+                <div class="vx-card__title flex flex-col items-center mb-8">
+                  <h4 class="mb-4">Cadastrar</h4>
+                  <p>Bora começar a gerenciar seu dinheiro?!</p>
+                </div>
+                <vs-input
+                  type="mail"
+                  icon="icon icon-mail"
+                  icon-pack="feather"
+                  label-placeholder="E-mail"
+                  v-model="mail"
+                  class="w-full no-icon-border"
+                  name="mail"
+                  v-validate="'required'"
+                  :danger="errors.has('mail')"
+                  :danger-text="errors.first('mail')"
+                />
+
+                <vs-input
+                  icon="icon icon-user"
+                  icon-pack="feather"
+                  label-placeholder="Username"
+                  v-model="username"
+                  class="w-full mt-6 no-icon-border"
+                  name="username"
+                  v-validate="'required'"
+                  :danger="errors.has('username')"
+                  :danger-text="errors.first('username')"
+                />
+
+                <vs-input
+                  type="password"
+                  icon="icon icon-lock"
+                  icon-pack="feather"
+                  label-placeholder="Senha"
+                  v-model="password"
+                  class="w-full mt-6 no-icon-border"
+                  name="password"
+                  v-validate="'required'"
+                  :danger="errors.has('password')"
+                  :danger-text="errors.first('password')"
+                />
+
+                <div class="mt-8">
+                  <vs-button
+                    class="w-full"
+                    to="/"
+                    type="border"
+                    @click.prevent="cadastrar"
+                  >Cadastrar</vs-button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </vx-card>
+    </div>
+  </div>
+</template>
