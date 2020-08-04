@@ -1,13 +1,3 @@
-/*=========================================================================================
-  File Name: store.js
-  Description: Vuex store
-  ----------------------------------------------------------------------------------------
-  Item Name: Vuesax Admin - VueJS Dashboard Admin Template
-  Author: Pixinvent
-  Author URL: http://www.themeforest.net/user/pixinvent
-==========================================================================================*/
-
-
 import Vue from 'vue'
 import Vuex from 'vuex'
 

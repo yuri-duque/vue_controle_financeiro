@@ -113,7 +113,6 @@ export default {
 
       if (response && response.data) {
         if (response.data.authenticated) {
-          this.$acl.change('admin')
           this.$localStorage.set("login_token", response.data.accessToken);
           this.$localStorage.set("login_rules", response.data.rules);
           this.$localStorage.set("login_expiration", response.data.expiration);
