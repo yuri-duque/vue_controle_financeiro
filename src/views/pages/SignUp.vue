@@ -78,7 +78,7 @@ import utils from "@/assets/utils";
 const dict = {
   custom: {
     mail:{
-      required: "O username é obrigatório!",
+      required: "O e-mail é obrigatório!",
     },
 
     username: {
