@@ -122,7 +122,6 @@ export default {
       api_login
         .login(data)
         .then((response) => {
-          debugger;
           this.$vs.loading.close();
           console.log(response);
 
@@ -135,7 +134,6 @@ export default {
           this.$router.push({ name: "home" });
         })
         .catch((ex) => {
-          debugger;
           this.$vs.loading.close();
           console.log(ex);
 
