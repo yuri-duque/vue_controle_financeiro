@@ -15,7 +15,7 @@
 
 export default [
   {
-    url: "/",
+    url: "/board",
     name: "Home",
     slug: "home",
     icon: "HomeIcon",

@@ -1,7 +1,7 @@
 import apiUtils from "./api_utils.js";
 
 export default {    
-    login(userName, passwordHash) {
-        return apiUtils.post("login", {userName, passwordHash});
+    login(login) {
+        return apiUtils.post("user/login", login);
     },
 };

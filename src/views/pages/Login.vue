@@ -42,7 +42,11 @@
                   <vs-checkbox v-model="lembre_me" class="mb-3">Lembre-me</vs-checkbox>
                   <router-link to="#">Esqueceu sua senha?</router-link>
                 </div>
-                <vs-button :to="{ name: 'cadastro-usuario'}" type="border" @click.prevent="cadastrar">Cadastrar</vs-button>
+                <vs-button
+                  :to="{ name: 'cadastro-usuario'}"
+                  type="border"
+                  @click.prevent="cadastrar"
+                >Cadastrar</vs-button>
                 <vs-button class="float-right" @click.prevent="submitForm">Login</vs-button>
               </div>
             </div>
@@ -99,7 +103,7 @@ export default {
 
       if (valido == 0) {
         this.login();
-      }else{
+      } else {
         this.$vs.notify({
           color: "danger",
           title: "Erro",
@@ -109,37 +113,40 @@ export default {
     },
 
     async login() {
-      // this.remember_me();
+      this.remember_me();
 
       this.$vs.loading();
 
-      api_login.login(this.username, this.password)
-      .then(response => {
-        debugger;
-        this.$vs.loading.close();
-        console.log(response);
+      const data = { username: this.username, password: this.password };
 
-        this.$vs.notify({
-          color: "success",
-          title: "Login",
-          text: "Login efetuado com sucesso!",
+      api_login
+        .login(data)
+        .then((response) => {
+          debugger;
+          this.$vs.loading.close();
+          console.log(response);
+
+          this.$vs.notify({
+            color: "success",
+            title: "Login",
+            text: "Login efetuado com sucesso!",
+          });
+
+          this.$router.push({ name: "home" });
+        })
+        .catch((ex) => {
+          debugger;
+          this.$vs.loading.close();
+          console.log(ex);
+
+          this.$vs.notify({
+            color: "danger",
+            title: "Erro",
+            text: "Erro ao fazer Login!",
+          });
         });
-
-        this.$router.push({name: "home"});
-      })
-      .catch(ex => {
-        debugger;
-        this.$vs.loading.close();
-        console.log(ex);
-
-        this.$vs.notify({
-          color: "danger",
-          title: "Erro",
-          text: "Erro ao fazer Login!",
-        });
-      });
     },
-    
+
     remember_me() {
       if (this.lembre_me) {
         this.$localStorage.set("login_is_remember_me", this.lembre_me);
@@ -150,7 +157,7 @@ export default {
         this.$localStorage.remove("login_userName");
         this.$localStorage.remove("login_password");
       }
-    }
+    },
   },
 };
 </script>
