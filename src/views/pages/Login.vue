@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import api_login from "@/api/api_login";
+import api_user from "@/api/api_user";
 
 import { Validator } from "vee-validate";
 import utils from "@/assets/utils";
@@ -119,7 +119,7 @@ export default {
 
       const data = { username: this.username, password: this.password };
 
-      api_login
+      api_user
         .login(data)
         .then((response) => {
           this.$vs.loading.close();
