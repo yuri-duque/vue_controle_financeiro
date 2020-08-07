@@ -47,8 +47,8 @@
                   class="w-full mt-6 no-icon-border"
                   name="password"
                   v-validate="'required'"
-                  :danger="errors.has('password')"
-                  :danger-text="errors.first('password')"
+                  :danger="errors.has('password') || this.error_confirmPassword"
+                  :danger-text="this.error_confirmPassword ? this.error_confirmPassword : errors.first('password')"
                 />
 
                 <vs-input
@@ -100,7 +100,7 @@ const dict = {
       required: "A senha é obrigatória!",
     },
     confirmPassword: {
-      required: "A senha é obrigatória!",
+      required: "A comfirmação de senha é obrigatória!",
     },
   },
 };
