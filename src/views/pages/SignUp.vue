@@ -155,8 +155,6 @@ export default {
       api_user
         .save(user)
         .then(() => {
-          debugger;
-
           this.$vs.loading.close();
           this.$vs.notify({
             color: "success",
@@ -167,7 +165,7 @@ export default {
           this.$router.push({ name: "login" });
         })
         .catch((error) => {
-          var exception = api_user.getError(error);
+          var exception = utils.getError(error);
 
           this.$vs.loading.close();
           this.$vs.notify({

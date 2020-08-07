@@ -133,14 +133,14 @@ export default {
 
           this.$router.push({ name: "home" });
         })
-        .catch((ex) => {
-          this.$vs.loading.close();
-          console.log(ex);
+        .catch((error) => {
+          var exception = utils.getError(error);
 
+          this.$vs.loading.close();
           this.$vs.notify({
             color: "danger",
-            title: "Erro",
-            text: "Erro ao fazer Login!",
+            title: "Erro ao logar",
+            text: exception,
           });
         });
     },

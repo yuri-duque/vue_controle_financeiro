@@ -10,20 +10,6 @@ export default {
         return JSON.stringify(data);
     },
 
-    getError(ex) {
-        var exception = "";
-
-        if (ex.response)
-            exception = ex.response.data;
-        else if (ex.request)
-            exception = ex.request;
-        else {
-            exception = ex.message;
-        }
-
-        return exception;
-    },
-
     call() {
         var token = localStorage.getItem("login_token");
 
