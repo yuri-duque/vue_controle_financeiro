@@ -7,7 +7,7 @@ let colors = {
 	// dark: '#1E1E1E',
 
 	primary: '#9b92f7',
-	success: '#43e88d',
+	success: '#28C76F',
 	danger: '#EA5455',
 	warning: '#FF9F43',
 	dark: '#1E1E1E',
