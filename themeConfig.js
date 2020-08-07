@@ -8,7 +8,7 @@ let colors = {
 
 	primary: '#9b92f7',
 	success: '#43e88d',
-	danger: '#fc5354',
+	danger: '#EA5455',
 	warning: '#FF9F43',
 	dark: '#1E1E1E',
 }

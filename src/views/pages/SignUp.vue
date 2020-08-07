@@ -170,7 +170,7 @@ export default {
           this.$vs.loading.close();
           this.$vs.notify({
             color: "danger",
-            title: "Erro ao cadastrar",
+            title: "Erro ao cadastrar usuário",
             text: exception,
           });
         });
