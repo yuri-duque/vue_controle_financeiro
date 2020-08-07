@@ -51,15 +51,25 @@
                   :danger-text="errors.first('password')"
                 />
 
+                <vs-input
+                  type="password"
+                  icon="icon icon-lock"
+                  icon-pack="feather"
+                  label-placeholder="Confirmar senha"
+                  v-model="confirmPassword"
+                  class="w-full mt-6 no-icon-border"
+                  name="confirmPassword"
+                  v-validate="'required'"
+                  :danger="errors.has('confirmPassword') || this.error_confirmPassword"
+                  :danger-text="this.error_confirmPassword ? this.error_confirmPassword : errors.first('confirmPassword')"
+                />
+
                 <vs-row class="mt-8">
                   <vs-col vs-lg="6" class="p-0">
                     <vs-button :to="{ name: 'login'}" type="border">Voltar</vs-button>
                   </vs-col>
                   <vs-col vs-lg="6" class="p-0">
-                    <vs-button
-                    class="float-right"
-                    @click.prevent="submitForm"
-                  >Cadastrar</vs-button>
+                    <vs-button class="float-right" @click.prevent="submitForm">Cadastrar</vs-button>
                   </vs-col>
                 </vs-row>
               </div>
@@ -72,12 +82,14 @@
 </template>
 
 <script>
+import api_user from "@/api/api_user";
+
 import { Validator } from "vee-validate";
 import utils from "@/assets/utils";
 
 const dict = {
   custom: {
-    mail:{
+    mail: {
       required: "O e-mail é obrigatório!",
     },
 
@@ -85,6 +97,9 @@ const dict = {
       required: "O username é obrigatório!",
     },
     password: {
+      required: "A senha é obrigatória!",
+    },
+    confirmPassword: {
       required: "A senha é obrigatória!",
     },
   },
@@ -97,20 +112,28 @@ export default {
     return {
       mail: "",
       username: "",
-      password: ""
+      password: "",
+      confirmPassword: "",
+
+      error_confirmPassword: null,
     };
   },
 
-  methods:{
-    async submitForm(){
+  methods: {
+    async submitForm() {
       var valido = 0;
 
       var result = await utils.validar(this.$validator);
       if (!result) valido++;
 
+      if (this.password !== this.confirmPassword) {
+        valido++;
+        this.error_confirmPassword = "As senhas não conhecidem";
+      }
+
       if (valido == 0) {
         this.cadastrar();
-      }else{
+      } else {
         this.$vs.notify({
           color: "danger",
           title: "Erro",
@@ -119,9 +142,41 @@ export default {
       }
     },
 
-    cadastrar(){
+    cadastrar() {
+      this.$vs.loading();
 
-    }
-  }
-}
+      const user = {
+        username: this.username,
+        password: this.password,
+        confirmPassword: this.confirmPassword,
+        email: this.mail,
+      };
+
+      api_user
+        .save(user)
+        .then(() => {
+          debugger;
+
+          this.$vs.loading.close();
+          this.$vs.notify({
+            color: "success",
+            title: "Cadastro de usuário",
+            text: "Usuário cadastrado com sucesso!",
+          });
+
+          this.$router.push({ name: "login" });
+        })
+        .catch((error) => {
+          var exception = api_user.getError(error);
+
+          this.$vs.loading.close();
+          this.$vs.notify({
+            color: "danger",
+            title: "Erro ao cadastrar",
+            text: exception,
+          });
+        });
+    },
+  },
+};
 </script>

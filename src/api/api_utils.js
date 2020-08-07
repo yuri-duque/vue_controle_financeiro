@@ -5,15 +5,29 @@ const urlApi = config.apiUrl;
 
 axios.defaults.withCredentials = true;
 
-export default {    
+export default {
     serializeData(data) {
         return JSON.stringify(data);
+    },
+
+    getError(ex) {
+        var exception = "";
+
+        if (ex.response)
+            exception = ex.response.data;
+        else if (ex.request)
+            exception = ex.request;
+        else {
+            exception = ex.message;
+        }
+
+        return exception;
     },
 
     call() {
         var token = localStorage.getItem("login_token");
 
-        if(token){
+        if (token) {
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
         }
 
