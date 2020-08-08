@@ -20,7 +20,7 @@ export default {
 
   data() {
     return {
-      series: [6.6],
+      series: [45],
       chartOptions: {
         chart: {
           height: 50,
