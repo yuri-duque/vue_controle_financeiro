@@ -1,39 +1,54 @@
+/*=========================================================================================
+  File Name: actions.js
+  Description: Vuex Store - actions
+  ----------------------------------------------------------------------------------------
+  Item Name: Vuexy - Vuejs, HTML & Laravel Admin Dashboard Template
+  Author: Pixinvent
+  Author URL: http://www.themeforest.net/user/pixinvent
+==========================================================================================*/
+
 const actions = {
 
-    // ////////////////////////////////////////////
-    // SIDEBAR & UI UX
-    // ////////////////////////////////////////////
+    // /////////////////////////////////////////////
+    // COMPONENTS
+    // /////////////////////////////////////////////
 
-    updateSidebarWidth({ commit }, width) {
-      commit('UPDATE_SIDEBAR_WIDTH', width);
+    // Vertical NavMenu
+    updateVerticalNavMenuWidth({ commit }, width) {
+      commit('UPDATE_VERTICAL_NAV_MENU_WIDTH', width)
     },
-    toggleContentOverlay({ commit }) {
-      commit('TOGGLE_CONTENT_OVERLAY');
-    },
-    updateTheme({ commit }, val) {
-      commit('UPDATE_THEME', val);
-    },
-    updateWindowWidth({ commit }, width) {
-      commit('UPDATE_WINDOW_WIDTH', width);
-    },
-
-
-    // ////////////////////////////////////////////
-    // COMPONENT
-    // ////////////////////////////////////////////
 
     // VxAutoSuggest
     updateStarredPage({ commit }, payload) {
       commit('UPDATE_STARRED_PAGE', payload)
     },
 
-    //  The Navbar
+    // The Navbar
     arrangeStarredPagesLimited({ commit }, list) {
       commit('ARRANGE_STARRED_PAGES_LIMITED', list)
     },
     arrangeStarredPagesMore({ commit }, list) {
       commit('ARRANGE_STARRED_PAGES_MORE', list)
     },
+
+    // /////////////////////////////////////////////
+    // UI
+    // /////////////////////////////////////////////
+
+    toggleContentOverlay({ commit }) {
+      commit('TOGGLE_CONTENT_OVERLAY')
+    },
+    updateTheme({ commit }, val) {
+      commit('UPDATE_THEME', val)
+    },
+
+    // /////////////////////////////////////////////
+    // User/Account
+    // /////////////////////////////////////////////
+
+    updateUserInfo({ commit }, payload) {
+      commit('UPDATE_USER_INFO', payload)
+    }
 }
 
 export default actions

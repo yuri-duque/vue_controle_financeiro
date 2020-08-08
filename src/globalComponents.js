@@ -1,3 +1,13 @@
+/*=========================================================================================
+  File Name: globalComponents.js
+  Description: Here you can register components globally
+  ----------------------------------------------------------------------------------------
+  Item Name: Vuexy - Vuejs, HTML & Laravel Admin Dashboard Template
+  Author: Pixinvent
+  Author URL: http://www.themeforest.net/user/pixinvent
+==========================================================================================*/
+
+
 import Vue from 'vue'
 import VxTooltip from './layouts/components/vx-tooltip/VxTooltip.vue'
 import VxCard  from './components/vx-card/VxCard.vue'
@@ -25,7 +35,7 @@ vSelect.props.components.default = () => ({
         icon: 'XIcon',
         svgClasses: 'w-4 h-4 mt-1'
       }
-    }),
+    })
   },
   OpenIndicator: {
     render: createElement => createElement('feather-icon', {
@@ -33,8 +43,8 @@ vSelect.props.components.default = () => ({
         icon: 'ChevronDownIcon',
         svgClasses: 'w-5 h-5'
       }
-    }),
-  },
-});
+    })
+  }
+})
 
 Vue.component(vSelect)

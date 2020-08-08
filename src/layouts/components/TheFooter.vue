@@ -3,40 +3,34 @@
     Description: Footer component
     Component Name: TheFooter
     ----------------------------------------------------------------------------------------
-    Item Name: Vuesax Admin - VueJS Dashboard Admin Template
+    Item Name: Vuexy - Vuejs, HTML & Laravel Admin Dashboard Template
       Author: Pixinvent
     Author URL: http://www.themeforest.net/user/pixinvent
 ========================================================================================== -->
 
 
 <template functional>
-  <footer class="the-footer flex-wrap justify-between" :class="classes">
-    <span>
-      YURI DUQUE  -- {{ new Date().getFullYear() }}
-      <a
-        href="https://github.com/yuriduque"
-        target="_blank"
-        rel="nofollow"
-        class="ml-4"
-      > github </a>
-
-      <a
-        href="https://www.linkedin.com/in/yuri-duque/"
-        target="_blank"
-        rel="nofollow"
-        class="ml-4"
-      > linkedin </a>
-    </span>
-  </footer>
+    <footer class="the-footer flex-wrap justify-between" :class="classes">
+        <p>
+          <span>COPYRIGHT &copy;</span>
+          <span>{{ new Date().getFullYear() }} </span>
+          <a href="https://1.envato.market/vuexy_admin" target="_blank" rel="nofollow">Pixinvent</a>
+          <span class="hidden sm:inline-block">, All rights Reserved</span>
+        </p>
+        <span class="md:flex hidden items-center">
+            <span>Hand-crafted & Made with</span>
+            <feather-icon icon="HeartIcon" svgClasses="stroke-current text-danger w-6 h-6" class="ml-2" />
+        </span>
+    </footer>
 </template>
 
 <script>
 export default {
-  name: "the-footer",
+  name: 'the-footer',
   props: {
     classes: {
-      type: String,
-    },
-  },
-};
+      type: String
+    }
+  }
+}
 </script>

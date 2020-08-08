@@ -1,3 +1,4 @@
+/* eslint-disable */
 /*
 
 Tailwind - The Utility-First CSS Framework
@@ -289,7 +290,10 @@ module.exports = {
     |
     */
 
-    textColor: theme => theme('colors'),
+    textColor: theme => ({
+      inherit: "inherit",
+      ...theme('colors'),
+    }),
 
 
     /*
@@ -883,3 +887,4 @@ module.exports = {
   }
 
 }
+/* eslint-enable */

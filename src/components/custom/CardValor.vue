@@ -1,5 +1,5 @@
 <template>
-  <vs-card class="d-theme-dark-bg">
+  <vs-card class="d-theme-dark-bg mx-2">
     <div slot="header">
       <vs-row vs-type="flex" vs-justify="space-between">
         <h3>{{titulo}}</h3>

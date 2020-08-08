@@ -1,5 +1,5 @@
 <template>
-  <vs-card class="d-theme-dark-bg p-3">
+  <vs-card class="d-theme-dark-bg mx-2">
     <h3>{{titulo}}</h3>
 
     <apexchart
