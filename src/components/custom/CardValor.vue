@@ -25,9 +25,6 @@ export default {
 
   methods: {
     formatarValor() {
-        console.log(this.ano);
-        console.log(this.mes);
-
       if (!this.valor) return "R$ 0,00";
 
       var valueFormatado = this.valor.toLocaleString("pt-br", {
