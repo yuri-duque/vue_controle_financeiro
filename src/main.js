@@ -56,6 +56,12 @@ Vue.use(VeeValidate);
 import VueLocalStorage from 'vue-localstorage'
 Vue.use (VueLocalStorage)
 
+// apexchart
+import VueApexCharts from 'vue-apexcharts'
+Vue.use(VueApexCharts) 
+Vue.component('apexchart', VueApexCharts)
+
+
 
 Vue.config.productionTip = false
 

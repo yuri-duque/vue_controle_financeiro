@@ -11,15 +11,19 @@
         <CardValor titulo="Receitas" mes="AGO" ano="2020" :valor="3000" />
       </vs-col>
     </vs-row>
+    
+    <RadialBar titulo="Despesas"/>
   </div>
 </template>
 
 <script>
 import CardValor from "@/components/custom/CardValor.vue";
+import RadialBar from "../components/custom/GraficoRadialBar";
 
 export default {
   components: {
     CardValor,
+    RadialBar
   },
 };
 </script>
