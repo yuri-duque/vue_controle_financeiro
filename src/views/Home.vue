@@ -12,7 +12,14 @@
       </vs-col>
     </vs-row>
     
-    <RadialBar titulo="Despesas"/>
+    <vs-row vs-w="12">
+      <vs-col vs-type="flex" vs-lg="6" vs-xs="12">
+        <RadialBar titulo="Receitas"/>
+      </vs-col>
+      <vs-col vs-type="flex" vs-lg="6" vs-xs="12">
+        <RadialBar titulo="Despesas"/>
+      </vs-col>
+    </vs-row>
   </div>
 </template>
 
