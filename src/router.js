@@ -35,6 +35,11 @@ const router = new Router({
                 path: '/',
                 name: 'home',
                 component: () => import('./views/Home.vue')
+              },
+              {
+                path: '/conta',
+                name: 'conta-lista',
+                component: () => import('./views/pages/contas/ContaLista.vue')
               }
             ],
         },

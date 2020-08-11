@@ -16,7 +16,7 @@ export default [
     icon: "HomeIcon",
   },
   {
-    url: "/contas",
+    url: "/conta",
     name: "Contas",
     slug: "contas",
     icon: "DollarSignIcon",
