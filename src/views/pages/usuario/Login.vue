@@ -18,7 +18,7 @@
                   icon-pack="feather"
                   label-placeholder="Username"
                   v-model="username"
-                  class="w-full no-icon-border"
+                  class="w-full mt-10 no-icon-border"
                   name="username"
                   v-validate="'required'"
                   :danger="errors.has('username')"
@@ -31,7 +31,7 @@
                   icon-pack="feather"
                   label-placeholder="Senha"
                   v-model="password"
-                  class="w-full mt-6 no-icon-border"
+                  class="w-full mt-6 mb-6 no-icon-border"
                   name="password"
                   v-validate="'required'"
                   :danger="errors.has('password')"
@@ -43,7 +43,7 @@
                   <router-link to="#">Esqueceu sua senha?</router-link>
                 </div>
                 <vs-button
-                  :to="{ name: 'cadastro-usuario'}"
+                  :to="{ name: 'usuario-cadastro'}"
                   type="border"
                   @click.prevent="cadastrar"
                 >Cadastrar</vs-button>

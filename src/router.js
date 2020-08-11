@@ -49,9 +49,14 @@ const router = new Router({
         // PAGES
         // =============================================================================
               {
-                path: '/pages/login',
-                name: 'page-login',
-                component: () => import('@/views/pages/Login.vue')
+                path: '/login',
+                name: 'usuario-login',
+                component: () => import('@/views/pages/usuario/Login.vue')
+              },
+              {
+                path: '/cadastro',
+                name: 'usuario-cadastro',
+                component: () => import('@/views/pages/usuario/Cadastro.vue')
               },
               {
                 path: '/404',
