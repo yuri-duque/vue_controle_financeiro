@@ -8,7 +8,7 @@
     </div>
 
     <div>
-      <p class="fonte bold">{{this.formatarValor(valor)}}</p>
+      <p class="fonte bold">{{formatarValor(valor)}}</p>
     </div>
   </vs-card>
 </template>

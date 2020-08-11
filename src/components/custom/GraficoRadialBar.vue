@@ -7,7 +7,6 @@
       height="350"
       :options="chartOptions"
       :series="series"
-      :color="color"
     ></apexchart>
   </vs-card>
 </template>
