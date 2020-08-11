@@ -35,12 +35,7 @@ const router = new Router({
                 path: '/',
                 name: 'home',
                 component: () => import('./views/Home.vue')
-              },
-              {
-                path: '/page2',
-                name: 'page-2',
-                component: () => import('./views/Page2.vue')
-              },
+              }
             ],
         },
     // =============================================================================
@@ -59,16 +54,16 @@ const router = new Router({
                 component: () => import('@/views/pages/Login.vue')
               },
               {
-                path: '/pages/error-404',
-                name: 'page-error-404',
-                component: () => import('@/views/pages/Error404.vue')
+                path: '/404',
+                name: '404',
+                component: () => import('@/views/pages/404.vue')
               },
             ]
         },
         // Redirect to 404 page, if no match found
         {
             path: '*',
-            redirect: '/pages/error-404'
+            redirect: '404'
         }
     ],
 })

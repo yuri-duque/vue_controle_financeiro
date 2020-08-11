@@ -11,20 +11,14 @@
 export default [
   {
     url: "/",
-    name: "Home",
-    slug: "home",
+    name: "Inicio",
+    slug: "inicio",
     icon: "HomeIcon",
   },
   {
-    url: "/page2",
-    name: "Page 2",
-    slug: "page2",
-    icon: "FileIcon",
-  },
-  {
-    url: "/page3",
-    name: "Page 3",
-    slug: "page3",
-    icon: "FileIcon",
+    url: "/contas",
+    name: "Contas",
+    slug: "contas",
+    icon: "DollarSignIcon",
   }
 ]
