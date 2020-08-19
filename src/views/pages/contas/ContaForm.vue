@@ -9,24 +9,24 @@
         <vs-col vs-lg="6" vs-sm="12" class="px-2 pt-2">
           <vs-input
             label="Nome"
-            v-model="titulo"
+            v-model="nome"
             class="w-full"
-            name="titulo"
+            name="nome"
             v-validate="'required'"
-            :danger="errors.has('titulo')"
-            :danger-text="errors.first('titulo')"
+            :danger="errors.has('nome')"
+            :danger-text="errors.first('nome')"
           />
         </vs-col>
 
         <vs-col vs-lg="6" vs-sm="12" class="px-2 pt-2">
           <vs-input
             label="Valor inicial"
-            v-model="titulo"
+            v-model="valorInicial"
             class="w-full"
-            name="titulo"
+            name="valorInicial"
             v-validate="'required'"
-            :danger="errors.has('titulo')"
-            :danger-text="errors.first('titulo')"
+            :danger="errors.has('valorInicial')"
+            :danger-text="errors.first('valorInicial')"
           />
         </vs-col>
       </vs-row>
@@ -47,19 +47,8 @@ export default {
     return {
       id: null,
 
-      titulo: null,
-
-      selectClassificacao: null,
-      optionsClassificacao: [
-        { id: 0, descricao: "Livre" },
-        { id: 10, descricao: "Dez" },
-        { id: 12, descricao: "Doze" },
-        { id: 14, descricao: "Quatorze" },
-        { id: 16, descricao: "Dezesseis" },
-        { id: 18, descricao: "Dezoito" },
-      ],
-
-      lancamento: false,
+      nome: null,
+      valorInicial: null
     };
   },
 };
