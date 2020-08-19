@@ -1,6 +1,11 @@
 <template>
   <div>
-    <h3 class="ml-2">Contas</h3>
+    <vs-row vs-type="flex" vs-justify="space-between">
+      <h3 class="ml-2">Contas</h3>
+
+      <vs-button class="float-right" icon="add" @click.prevent="submitForm">Nova conta
+      </vs-button>
+    </vs-row>
 
     <div class="mt-10">
       <vs-row vs-w="12">
