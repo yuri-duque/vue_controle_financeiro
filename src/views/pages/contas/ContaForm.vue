@@ -41,6 +41,22 @@
 </template>
 
 <script>
+import { Validator } from "vee-validate";
+import utils from "@/assets/utils";
+
+const dict = {
+  custom: {
+    nome: {
+      required: "O nome da conta é obrigatório!",
+    },
+
+    valorInicial: {
+      required: "O valor inicial da conta é obrigatório!",
+    },
+  },
+};
+
+Validator.localize("en", dict);
 
 export default {
   data() {
