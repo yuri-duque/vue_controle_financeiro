@@ -22,37 +22,32 @@ const router = new Router({
     routes: [
 
         {
-    // =============================================================================
-    // MAIN LAYOUT ROUTES
-    // =============================================================================
             path: '',
             component: () => import('./layouts/main/Main.vue'),
             children: [
-        // =============================================================================
-        // Theme Routes
-        // =============================================================================
               {
                 path: '/',
                 name: 'home',
                 component: () => import('./views/Home.vue')
               },
+
+              // CONTA
               {
                 path: '/conta',
                 name: 'conta-lista',
                 component: () => import('./views/pages/contas/ContaLista.vue')
-              }
+              },
+              {
+                path: '/conta/cadastro',
+                name: 'conta-cadastro',
+                component: () => import('./views/pages/contas/ContaForm.vue')
+              },
             ],
         },
-    // =============================================================================
-    // FULL PAGE LAYOUTS
-    // =============================================================================
         {
             path: '',
             component: () => import('@/layouts/full-page/FullPage.vue'),
             children: [
-        // =============================================================================
-        // PAGES
-        // =============================================================================
               {
                 path: '/login',
                 name: 'usuario-login',
