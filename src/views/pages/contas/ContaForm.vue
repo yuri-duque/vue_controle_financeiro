@@ -67,6 +67,92 @@ export default {
       valorInicial: null
     };
   },
+
+  methods:{
+    async validar() {
+      var invalido = 0;
+
+      var result = await utils.validar(this.$validator);
+      if (!result) invalido++;
+
+      if (invalido == 0) {
+        this.submit();
+      } else {
+        this.$vs.notify({
+          color: "danger",
+          title: "Erro",
+          text: "Algum dos campos está com erro, verifique e tente novamente",
+        });
+      }
+    },
+
+    submit() {
+      // this.$vs.loading();
+
+      // const data = {
+      //   idCliente: this.selectCliente.id,
+      //   idFilme: this.selectFilme.id,
+      // };
+
+      // if (!this.id) {
+      //   // SALVAR
+      //   api_locacao
+      //     .alugar(data)
+      //     .then(() => {
+      //       this.$vs.loading.close();
+
+      //       this.$vs.notify({
+      //         color: "success",
+      //         title: "Login",
+      //         text: "Locação cadastrada com sucesso!",
+      //       });
+
+      //       this.$router.push({ name: "locacao-list" });
+      //     })
+      //     .catch((error) => {
+      //       var exception = utils.getError(error);
+
+      //       this.$vs.loading.close();
+      //       this.$vs.notify({
+      //         color: "danger",
+      //         title: "Erro ao cadastrar locação",
+      //         text: exception,
+      //       });
+      //     });
+      // } else {
+      //   // EDITAR
+      //   data.id = parseInt(this.id);
+      //   data.dataLocacao = formatar_data(this.dataLocacao);
+      //   data.dataDevolucao = this.dataDevolucao
+      //     ? formatar_data(this.dataDevolucao)
+      //     : null;
+
+      //   api_locacao
+      //     .editar(this.id, data)
+      //     .then(() => {
+      //       this.$vs.loading.close();
+
+      //       this.$vs.notify({
+      //         color: "success",
+      //         title: "Login",
+      //         text: "Locação editado com sucesso!",
+      //       });
+
+      //       this.$router.push({ name: "locacao-list" });
+      //     })
+      //     .catch((error) => {
+      //       var exception = utils.getError(error);
+
+      //       this.$vs.loading.close();
+      //       this.$vs.notify({
+      //         color: "danger",
+      //         title: "Erro ao editar locação",
+      //         text: exception,
+      //       });
+      //     });
+      // }
+    },
+  }
 };
 </script>
 
