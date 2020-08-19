@@ -62,3 +62,7 @@
  .span-text-validation{
     font-size: 12px;
  }
+
+ [dir] .theme-dark input {
+   background:  #262c49;
+}
