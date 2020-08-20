@@ -24,10 +24,39 @@
 
 <script>
 import cardConta from "@/components/custom/conta/CardConta.vue";
+import api_conta from "@/api/api_conta";
+import utils from "@/assets/utils";
 
 export default {
   components: {
     cardConta,
+  },
+
+  created() {
+    this.getAll();
+  },
+
+  methods: {
+    getAll() {
+      this.$vs.loading();
+      api_conta
+        .getAll()
+        .then((response) => {
+          this.$vs.loading.close();
+
+          console.log(response.data)
+        })
+        .catch((error) => {
+          var exception = utils.getError(error);
+
+          this.$vs.loading.close();
+          this.$vs.notify({
+            color: "danger",
+            title: "Erro ao carregar as contas!",
+            text: exception,
+          });
+        });
+    },
   },
 };
 </script>
