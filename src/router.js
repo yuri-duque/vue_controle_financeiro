@@ -28,19 +28,28 @@ const router = new Router({
               {
                 path: '/',
                 name: 'home',
-                component: () => import('./views/Home.vue')
+                component: () => import('./views/Home.vue'),
+                meta: {
+                  rule: "admin"
+                },
               },
 
               // CONTA
               {
                 path: '/conta',
                 name: 'conta-lista',
-                component: () => import('./views/pages/contas/ContaLista.vue')
+                component: () => import('./views/pages/contas/ContaLista.vue'),
+                meta: {
+                  rule: "admin"
+                },
               },
               {
                 path: '/conta/cadastro',
                 name: 'conta-cadastro',
-                component: () => import('./views/pages/contas/ContaForm.vue')
+                component: () => import('./views/pages/contas/ContaForm.vue'),
+                meta: {
+                  rule: "admin"
+                },
               },
             ],
         },
@@ -51,12 +60,18 @@ const router = new Router({
               {
                 path: '/login',
                 name: 'usuario-login',
-                component: () => import('@/views/pages/usuario/Login.vue')
+                component: () => import('@/views/pages/usuario/Login.vue'),
+                meta: {
+                  rule: "public"
+                },
               },
               {
                 path: '/cadastro',
                 name: 'usuario-cadastro',
-                component: () => import('@/views/pages/usuario/Cadastro.vue')
+                component: () => import('@/views/pages/usuario/Cadastro.vue'),
+                meta: {
+                  rule: "public"
+                },
               },
               {
                 path: '/404',
