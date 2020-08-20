@@ -86,6 +86,9 @@ export default {
   },
 
   mounted() {
+    this.$acl.change("public");
+    this.$localStorage.set("login_token", "");
+
     if (this.$localStorage.get("login_is_remember_me")) {
       this.username = this.$localStorage.get("login_userName");
       this.password = this.$localStorage.get("login_password");
@@ -123,6 +126,8 @@ export default {
         .login(data)
         .then((response) => {
           this.$vs.loading.close();
+
+          this.$acl.change("admin");
           this.$localStorage.set("login_token", response.data.token);
 
           this.$vs.notify({
