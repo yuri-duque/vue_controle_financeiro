@@ -51,6 +51,9 @@ Vue.use(VeeValidate);
 import VueLocalStorage from 'vue-localstorage'
 Vue.use (VueLocalStorage)
 
+// VUE acl
+import acl from './acl'
+
 // apexchart
 import VueApexCharts from 'vue-apexcharts'
 Vue.use(VueApexCharts) 
@@ -61,5 +64,6 @@ Vue.config.productionTip = false
 new Vue({
   router,
   store,
+  acl,
   render: h => h(App)
 }).$mount('#app')
