@@ -11,6 +11,7 @@ export default {
     },
 
     call() {
+        debugger;
         var token = localStorage.getItem("login_token");
 
         if (token) {

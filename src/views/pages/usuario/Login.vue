@@ -123,7 +123,7 @@ export default {
         .login(data)
         .then((response) => {
           this.$vs.loading.close();
-          console.log(response);
+          this.$localStorage.set("login_token", response.data.token);
 
           this.$vs.notify({
             color: "success",
