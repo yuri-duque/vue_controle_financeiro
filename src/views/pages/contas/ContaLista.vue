@@ -16,7 +16,7 @@
           v-for="(conta, index) in contas"
           :key="index"
         >
-          <cardConta />
+          <cardConta :titulo="conta.name" :valor="conta.balance"/>
         </vs-col>
       </vs-row>
     </div>
