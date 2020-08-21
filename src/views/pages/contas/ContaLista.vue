@@ -7,8 +7,15 @@
     </vs-row>
 
     <div class="mt-10">
-      <vs-row vs-w="12" v-for="(conta, index) in contas" :key="index">
-        <vs-col vs-type="flex" vs-lg="4" vs-sm="6" vs-xs="12">
+      <vs-row vs-w="12">
+        <vs-col
+          vs-type="flex"
+          vs-lg="4"
+          vs-sm="6"
+          vs-xs="12"
+          v-for="(conta, index) in contas"
+          :key="index"
+        >
           <cardConta />
         </vs-col>
       </vs-row>
@@ -26,10 +33,10 @@ export default {
     cardConta,
   },
 
-  data(){
-    return{
-      contas: null
-    }
+  data() {
+    return {
+      contas: null,
+    };
   },
 
   created() {
