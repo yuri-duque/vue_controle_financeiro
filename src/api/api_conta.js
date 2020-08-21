@@ -5,7 +5,11 @@ export default {
         return apiUtils.get("wallet");
     },
 
-    save(conta) {
+    post(conta){
         return apiUtils.post("wallet", conta);
-    }, 
+    },
+
+    put(conta, id){
+        return apiUtils.put("wallet", conta, id);
+    }
 };
