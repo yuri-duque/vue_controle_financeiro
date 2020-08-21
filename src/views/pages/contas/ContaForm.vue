@@ -123,7 +123,7 @@ export default {
             title: "Login",
             text: "Conta cadastrada com sucesso!",
           });
-          this.$router.push({ name: "conta-list" });
+          this.$router.push({ name: "conta-lista" });
         })
         .catch((error) => {
           var exception = utils.getError(error);
@@ -149,7 +149,7 @@ export default {
             title: "Login",
             text: "Conta editada com sucesso!",
           });
-          this.$router.push({ name: "conta-list" });
+          this.$router.push({ name: "conta-lista" });
         })
         .catch((error) => {
           var exception = utils.getError(error);
