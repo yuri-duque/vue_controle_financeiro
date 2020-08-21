@@ -93,6 +93,34 @@ function remover_virgulaERS(text) {
     return text;
 }
 
+function mascara_cep(text) {
+    text = mascara_numero(text);
+
+    if (text.length > 9) {
+        text = text.substring(0, text.length - 1);
+        return text;
+    } else if (text.length > 5 && !text.includes("-")) {
+        var t = text.substring(0, 5) + "-" + text.substring(5);
+        return t;
+    }
+
+    return text;
+}
+
+function mascara_telefone(text) {
+    text += "";
+
+    if (text.length > 15) {
+        text = text.substring(0, text.length - 1);
+        return text;
+    }
+
+    text = text.replace(/\D/g, "");
+    text = text.replace(/^(\d{2})(\d)/g, "($1) $2");
+    text = text.replace(/(\d)(\d{4})$/, "$1-$2");
+    return text;
+}
+
 function remover_ponto(text) {
     if (text && text.includes(".")) {
         var index = text.indexOf(".", 0);
@@ -116,6 +144,4 @@ function debounce(func, wait) {
     }
 }
 
-export { mascara_numero, mascara_data, formatar_data, formatar_data_ao_contrario, number_format, remover_virgulaERS, remover_ponto, debounce }
-
-
+export { mascara_numero, mascara_cep, mascara_data, formatar_data, formatar_data_ao_contrario, number_format, remover_virgulaERS, mascara_telefone, remover_ponto, debounce }
