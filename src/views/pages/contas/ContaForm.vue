@@ -43,6 +43,12 @@
 <script>
 import { Validator } from "vee-validate";
 import utils from "@/assets/utils";
+import api_conta from "@/api/api_conta";
+
+import {
+  number_format,
+  remover_virgulaERS
+} from "@/assets/utils/mask";
 
 const dict = {
   custom: {
@@ -64,11 +70,15 @@ export default {
       id: null,
 
       nome: null,
-      valorInicial: null
+      valorInicial: null,
     };
   },
 
-  methods:{
+  mounted() {
+    this.valorInicial = number_format("0");
+  },
+
+  methods: {
     async validar() {
       var invalido = 0;
 
@@ -87,72 +97,79 @@ export default {
     },
 
     submit() {
-      // this.$vs.loading();
+      this.$vs.loading();
 
-      // const data = {
-      //   idCliente: this.selectCliente.id,
-      //   idFilme: this.selectFilme.id,
-      // };
+      var conta = {
+        id: this.id ? this.id : 0,
+        name: this.nome,
+        balance: parseFloat(remover_virgulaERS(this.valorInicial)),
+      };
 
-      // if (!this.id) {
-      //   // SALVAR
-      //   api_locacao
-      //     .alugar(data)
-      //     .then(() => {
-      //       this.$vs.loading.close();
-
-      //       this.$vs.notify({
-      //         color: "success",
-      //         title: "Login",
-      //         text: "Locação cadastrada com sucesso!",
-      //       });
-
-      //       this.$router.push({ name: "locacao-list" });
-      //     })
-      //     .catch((error) => {
-      //       var exception = utils.getError(error);
-
-      //       this.$vs.loading.close();
-      //       this.$vs.notify({
-      //         color: "danger",
-      //         title: "Erro ao cadastrar locação",
-      //         text: exception,
-      //       });
-      //     });
-      // } else {
-      //   // EDITAR
-      //   data.id = parseInt(this.id);
-      //   data.dataLocacao = formatar_data(this.dataLocacao);
-      //   data.dataDevolucao = this.dataDevolucao
-      //     ? formatar_data(this.dataDevolucao)
-      //     : null;
-
-      //   api_locacao
-      //     .editar(this.id, data)
-      //     .then(() => {
-      //       this.$vs.loading.close();
-
-      //       this.$vs.notify({
-      //         color: "success",
-      //         title: "Login",
-      //         text: "Locação editado com sucesso!",
-      //       });
-
-      //       this.$router.push({ name: "locacao-list" });
-      //     })
-      //     .catch((error) => {
-      //       var exception = utils.getError(error);
-
-      //       this.$vs.loading.close();
-      //       this.$vs.notify({
-      //         color: "danger",
-      //         title: "Erro ao editar locação",
-      //         text: exception,
-      //       });
-      //     });
-      // }
+      if (!this.id) {
+        this.post(conta);
+      } else {
+        this.put(conta);
+      }
     },
-  }
+
+    post(conta) {
+      // SALVAR
+      api_conta
+        .post(conta)
+        .then(() => {
+          this.$vs.loading.close();
+          this.$vs.notify({
+            color: "success",
+            title: "Login",
+            text: "Conta cadastrada com sucesso!",
+          });
+          this.$router.push({ name: "conta-list" });
+        })
+        .catch((error) => {
+          var exception = utils.getError(error);
+          this.$vs.loading.close();
+          this.$vs.notify({
+            color: "danger",
+            title: "Erro ao cadastrar conta",
+            text: exception,
+          });
+        });
+    },
+
+    put(conta) {
+      // EDITAR
+      conta.id = parseInt(this.id);
+
+      api_conta
+        .put(conta, this.id)
+        .then(() => {
+          this.$vs.loading.close();
+          this.$vs.notify({
+            color: "success",
+            title: "Login",
+            text: "Conta editada com sucesso!",
+          });
+          this.$router.push({ name: "conta-list" });
+        })
+        .catch((error) => {
+          var exception = utils.getError(error);
+          this.$vs.loading.close();
+          this.$vs.notify({
+            color: "danger",
+            title: "Erro ao editar conta",
+            text: exception,
+          });
+        });
+    },
+  },
+
+  watch: {
+    valorInicial() {
+      if (this.valorInicial) {
+        this.valorInicial = number_format(this.valorInicial);
+      }
+    },
+  },
 };
 </script>
 
