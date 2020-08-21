@@ -7,13 +7,7 @@
     </vs-row>
 
     <div class="mt-10">
-      <vs-row vs-w="12">
-        <vs-col vs-type="flex" vs-lg="4" vs-sm="6" vs-xs="12">
-          <cardConta />
-        </vs-col>
-        <vs-col vs-type="flex" vs-lg="4" vs-sm="6" vs-xs="12">
-          <cardConta />
-        </vs-col>
+      <vs-row vs-w="12" v-for="(conta, index) in contas" :key="index">
         <vs-col vs-type="flex" vs-lg="4" vs-sm="6" vs-xs="12">
           <cardConta />
         </vs-col>
@@ -32,6 +26,12 @@ export default {
     cardConta,
   },
 
+  data(){
+    return{
+      contas: null
+    }
+  },
+
   created() {
     this.getAll();
   },
@@ -44,7 +44,7 @@ export default {
         .then((response) => {
           this.$vs.loading.close();
 
-          console.log(response.data)
+          this.contas = response.data;
         })
         .catch((error) => {
           var exception = utils.getError(error);
