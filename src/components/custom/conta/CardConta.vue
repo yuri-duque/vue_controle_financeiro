@@ -12,11 +12,11 @@
     
     <vs-row class="my-3 mt-5">
       <vs-col vs-type="flex" vs-w="6" class="px-2">
-        <vs-button icon-pack="feather" icon="icon-arrow-down" color="danger" class="w-full"></vs-button>
+        <vs-button icon-pack="feather" icon="icon-arrow-down" color="danger" class="w-full" @click="despesa"></vs-button>
       </vs-col>
 
       <vs-col vs-type="flex" vs-w="6" class="px-2">
-        <vs-button icon-pack="feather" icon="icon-arrow-up" color="success" class="w-full"></vs-button>
+        <vs-button icon-pack="feather" icon="icon-arrow-up" color="success" class="w-full"  @click="receita"></vs-button>
       </vs-col>      
     </vs-row>
   </vs-card>
@@ -40,6 +40,14 @@ export default {
       });
       return valueFormatado;
     },
+
+    despesa(){
+      this.$emit('despesa')
+    },
+
+    receita(){
+      this.$emit('receita')
+    }
   },
 };
 </script>
