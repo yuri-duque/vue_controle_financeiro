@@ -3,7 +3,12 @@
     <vs-row vs-type="flex" vs-justify="space-between">
       <h3 class="ml-2">Contas</h3>
 
-      <vs-button class="float-right" icon-pack="feather" icon="icon-plus" :to="{ name: 'conta-cadastro'}">Nova conta</vs-button>
+      <vs-button
+        class="float-right"
+        icon-pack="feather"
+        icon="icon-plus"
+        :to="{ name: 'conta-cadastro'}"
+      >Nova conta</vs-button>
     </vs-row>
 
     <div class="mt-10">
@@ -16,7 +21,13 @@
           v-for="(conta, index) in contas"
           :key="index"
         >
-          <cardConta :titulo="conta.name" :valor="conta.balance" :buttons="true"/>
+          <cardConta
+            :titulo="conta.name"
+            :valor="conta.balance"
+            :buttons="true"
+            @despesa="novaDespesa(conta.id)"
+            @receita="novaReceita(conta.id)"
+          />
         </vs-col>
       </vs-row>
     </div>
@@ -64,6 +75,14 @@ export default {
           });
         });
     },
+
+    novaReceita(id){
+
+    },
+
+    novaDespesa(id){
+
+    }
   },
 };
 </script>
