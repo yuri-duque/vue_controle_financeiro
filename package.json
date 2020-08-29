@@ -48,7 +48,7 @@
     "vue-prism-component": "^1.1.1",
     "vue-property-decorator": "^8.1.1",
     "vue-quill-editor": "^3.0.6",
-    "vue-router": "^3.0.6",
+    "vue-router": "^3.4.3",
     "vue-select": "^3.1.0",
     "vue-simple-calendar": "^4.2.2",
     "vue-simple-suggest": "^1.9.5",

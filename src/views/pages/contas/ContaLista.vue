@@ -32,7 +32,13 @@
       </vs-row>
     </div>
 
-    <receita-despesa-form :isSidebarActive="formReceitaDespesaActive" @closeSidebar="formReceitaDespesaActive = false"/>
+    <receita-despesa-form
+      :isSidebarActive="formReceitaDespesaActive"
+      :isDespesa="isDespesa"
+      :isReceita="isReceita"
+      @closeSidebar="formReceitaDespesaActive = false"
+      v-if="formReceitaDespesaActive"
+    />
   </div>
 </template>
 
@@ -41,19 +47,21 @@ import cardConta from "@/components/custom/conta/CardConta.vue";
 import api_conta from "@/api/api_conta";
 import utils from "@/assets/utils";
 
-import receitaDespesaForm from "./../receita_despesa/Form"
+import receitaDespesaForm from "./../receita_despesa/Form";
 
 export default {
   components: {
     cardConta,
-    receitaDespesaForm
+    receitaDespesaForm,
   },
 
   data() {
     return {
       contas: null,
 
-      formReceitaDespesaActive: false
+      formReceitaDespesaActive: false,
+      isDespesa: false,
+      isReceita: false
     };
   },
 
@@ -83,13 +91,17 @@ export default {
         });
     },
 
-    novaReceita(id){
+    novaReceita(id) {
+      this.isDespesa = false;
+      this.isReceita = true;
       this.formReceitaDespesaActive = true;
     },
 
-    novaDespesa(id){
+    novaDespesa(id) {
+      this.isDespesa = true;
+      this.isReceita = false;
       this.formReceitaDespesaActive = true;
-    }
+    },
   },
 };
 </script>

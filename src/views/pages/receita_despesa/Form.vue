@@ -10,8 +10,7 @@
     v-model="isSidebarActiveLocal"
   >
     <div class="mt-6 flex items-center justify-between px-6">
-      <h4 v-if="!this.id">ADICIONAR NOVO TIPO DE PRODUTO</h4>
-      <h4 v-if="this.id">EDITAR TIPO DE PRODUTO</h4>
+      <h4>{{titulo}}</h4>
       <feather-icon icon="XIcon" @click.stop="isSidebarActiveLocal = false" class="cursor-pointer"></feather-icon>
     </div>
     <vs-divider class="mb-0"></vs-divider>
@@ -28,10 +27,31 @@ export default {
       required: true,
     },
     id: null,
+
+    isDespesa: {
+      type: Boolean,
+      required: true,
+    },
+
+    isReceita: {
+      type: Boolean,
+      required: true,
+    },
   },
 
   data() {
-    return {};
+    return {
+      titulo: "",
+    };
+  },
+
+  mounted() {
+    debugger;
+    if (this.id) this.titulo += "Editar ";
+    else this.titulo += "Cadastrar ";
+
+    if (this.isDespesa) this.titulo += "despesa";
+    else if(this.isReceita) this.titulo += "receita";
   },
 
   computed: {
