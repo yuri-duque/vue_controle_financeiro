@@ -31,7 +31,7 @@
         </vs-col>
       </vs-row>
 
-      <vs-row vs-type="flex" vs-justify="flex-end" class="mt-6 pr-2">
+      <vs-row vs-type="flex" vs-justify="flex-end" class="mt-6 pb-4 pr-2">
         <vs-button v-if="!id" @click="validar" class="font-semibold">Cadastrar</vs-button>
 
         <vs-button v-if="id" @click="validar" class="font-semibold" type="filled">Editar</vs-button>
