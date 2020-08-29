@@ -59,6 +59,8 @@ export default {
     return {
       contas: null,
 
+      id: null,
+
       formReceitaDespesaActive: false,
       isDespesa: false,
       isReceita: false
@@ -92,12 +94,14 @@ export default {
     },
 
     novaReceita(id) {
+      this.id = id;
       this.isDespesa = false;
       this.isReceita = true;
       this.formReceitaDespesaActive = true;
     },
 
     novaDespesa(id) {
+      this.id = id;
       this.isDespesa = true;
       this.isReceita = false;
       this.formReceitaDespesaActive = true;

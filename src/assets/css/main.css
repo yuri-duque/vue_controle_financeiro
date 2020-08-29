@@ -66,3 +66,11 @@
  [dir] .theme-dark input {
    background:  #262c49;
 }
+
+.vs-sidebar-position-right{
+   max-width: 360px;
+}
+
+.text-center{
+   text-align: center;
+}

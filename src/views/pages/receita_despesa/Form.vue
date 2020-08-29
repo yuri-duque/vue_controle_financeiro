@@ -15,11 +15,67 @@
     </div>
     <vs-divider class="mb-0"></vs-divider>
 
-    <h1>TESTE SIDE BAR</h1>
+    <div>
+        <vs-col vs-lg="6" vs-sm="12" class="px-2 pt-2">
+          <vs-input
+            label="Descrição"
+            v-model="descricao"
+            class="w-full"
+            name="descricao"
+            v-validate="'required'"
+            :danger="errors.has('descricao')"
+            :danger-text="errors.first('descricao')"
+          />
+        </vs-col>
+
+        <vs-col vs-lg="6" vs-sm="12" class="px-2 pt-2">
+          <vs-input
+            label="Valor"
+            v-model="valor"
+            class="w-full"
+            name="valor"
+            v-validate="'required'"
+            :danger="errors.has('valor')"
+            :danger-text="errors.first('valor')"
+          />
+        </vs-col>
+      
+
+      <vs-row vs-type="flex" vs-justify="flex-end" class="mt-6 pb-4 pr-2">
+        <vs-button v-if="!id" @click="validar" class="font-semibold">Cadastrar</vs-button>
+
+        <vs-button v-if="id" @click="validar" class="font-semibold" type="filled">Editar</vs-button>
+      </vs-row>
+    </div>
+
   </vs-sidebar>
 </template>
 
 <script>
+import { Validator } from "vee-validate";
+import utils from "@/assets/utils";
+import api_receita from "@/api/api_receita";
+import api_despesa from "@/api/api_despesa";
+
+import {
+  number_format,
+  remover_virgulaERS
+} from "@/assets/utils/mask";
+
+const dict = {
+  custom: {
+    descricao: {
+      required: "O nome da conta é obrigatório!",
+    },
+
+    valor: {
+      required: "O valor inicial da conta é obrigatório!",
+    },
+  },
+};
+
+Validator.localize("en", dict);
+
 export default {
   props: {
     isSidebarActive: {
@@ -42,11 +98,15 @@ export default {
   data() {
     return {
       titulo: "",
+
+      receitaDespesa:{
+        descricao: null,
+        valor: null
+      }
     };
   },
 
   mounted() {
-    debugger;
     if (this.id) this.titulo += "Editar ";
     else this.titulo += "Cadastrar ";
 
@@ -75,4 +135,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.text-center{
+  text-align: center;
+}
 </style>

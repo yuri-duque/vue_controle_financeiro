@@ -22,6 +22,9 @@ const router = new Router({
       path: '/',
       name: 'board',
       component: () => import('./layouts/main/Main.vue'),
+      meta: {
+        rule: "admin"
+      },
       children: [
         {
           path: '',
