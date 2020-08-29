@@ -1,85 +1,58 @@
 <template>
-  <vs-card class="d-theme-dark-bg">
-    <div slot="header">
-      <h3>Cadastro de conta</h3>
+  <vs-sidebar
+    click-not-close
+    position-right
+    parent="body"
+    default-index="1"
+    color="primary"
+    class="add-new-data-sidebar items-no-padding"
+    spacer
+    v-model="isSidebarActiveLocal"
+  >
+    <div class="mt-6 flex items-center justify-between px-6">
+      <h4 v-if="!this.id">ADICIONAR NOVO TIPO DE PRODUTO</h4>
+      <h4 v-if="this.id">EDITAR TIPO DE PRODUTO</h4>
+      <feather-icon icon="XIcon" @click.stop="isSidebarActiveLocal = false" class="cursor-pointer"></feather-icon>
     </div>
+    <vs-divider class="mb-0"></vs-divider>
 
-    <div>
-      <vs-row>
-        <vs-col vs-lg="6" vs-sm="12" class="px-2 pt-2">
-          <vs-input
-            label="Nome"
-            v-model="nome"
-            class="w-full"
-            name="nome"
-            v-validate="'required'"
-            :danger="errors.has('nome')"
-            :danger-text="errors.first('nome')"
-          />
-        </vs-col>
-
-        <vs-col vs-lg="6" vs-sm="12" class="px-2 pt-2">
-          <vs-input
-            label="Valor inicial"
-            v-model="valorInicial"
-            class="w-full"
-            name="valorInicial"
-            v-validate="'required'"
-            :danger="errors.has('valorInicial')"
-            :danger-text="errors.first('valorInicial')"
-          />
-        </vs-col>
-      </vs-row>
-
-      <vs-row vs-type="flex" vs-justify="flex-end" class="mt-6 pr-2">
-        <vs-button v-if="!id" @click="validar" class="font-semibold">Cadastrar</vs-button>
-
-        <vs-button v-if="id" @click="validar" class="font-semibold" type="filled">Editar</vs-button>
-      </vs-row>
-    </div>
-  </vs-card>
+    <h1>TESTE SIDE BAR</h1>
+  </vs-sidebar>
 </template>
 
 <script>
-import { Validator } from "vee-validate";
-import utils from "@/assets/utils";
-import api_conta from "@/api/api_conta";
-
-import {
-  number_format,
-  remover_virgulaERS
-} from "@/assets/utils/mask";
-
-const dict = {
-  custom: {
-    nome: {
-      required: "O nome da conta é obrigatório!",
-    },
-
-    valorInicial: {
-      required: "O valor inicial da conta é obrigatório!",
-    },
-  },
-};
-
-Validator.localize("en", dict);
-
 export default {
-  data() {
-    return {
-    };
+  props: {
+    isSidebarActive: {
+      type: Boolean,
+      required: true,
+    },
+    id: null,
   },
 
-  mounted() {
+  data() {
+    return {};
+  },
+
+  computed: {
+    isSidebarActiveLocal: {
+      get() {
+        return this.isSidebarActive;
+      },
+      set(val) {
+        if (!val) {
+          this.initValues();
+          this.$emit("closeSidebar");
+        }
+      },
+    },
   },
 
   methods: {
-  },
-
-  watch: {
+    initValues() {},
   },
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 </style>
