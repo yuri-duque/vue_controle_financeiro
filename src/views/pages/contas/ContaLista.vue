@@ -31,6 +31,8 @@
         </vs-col>
       </vs-row>
     </div>
+
+    <receita-despesa-form :isSidebarActive="formReceitaDespesaActive" @closeSidebar="formReceitaDespesaActive = false"/>
   </div>
 </template>
 
@@ -39,14 +41,19 @@ import cardConta from "@/components/custom/conta/CardConta.vue";
 import api_conta from "@/api/api_conta";
 import utils from "@/assets/utils";
 
+import receitaDespesaForm from "./../receita_despesa/Form"
+
 export default {
   components: {
     cardConta,
+    receitaDespesaForm
   },
 
   data() {
     return {
       contas: null,
+
+      formReceitaDespesaActive: false
     };
   },
 
@@ -77,11 +84,11 @@ export default {
     },
 
     novaReceita(id){
-      
+      this.formReceitaDespesaActive = true;
     },
 
     novaDespesa(id){
-
+      this.formReceitaDespesaActive = true;
     }
   },
 };
