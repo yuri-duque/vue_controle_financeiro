@@ -37,7 +37,7 @@
       :isDespesa="isDespesa"
       :isReceita="isReceita"
       :idConta="id"
-      @closeSidebar="formReceitaDespesaActive = false"
+      @closeSidebar="getAll()"
       v-if="formReceitaDespesaActive"
     />
   </div>
@@ -68,13 +68,16 @@ export default {
     };
   },
 
-  created() {
+  mounted(){
     this.getAll();
   },
 
   methods: {
     getAll() {
       this.$vs.loading();
+
+      this.formReceitaDespesaActive = false;
+
       api_conta
         .getAll()
         .then((response) => {
