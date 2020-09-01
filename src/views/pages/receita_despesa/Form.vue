@@ -16,38 +16,36 @@
     <vs-divider class="mb-0"></vs-divider>
 
     <div>
-        <vs-col vs-lg="6" vs-sm="12" class="px-2 pt-2">
-          <vs-input
-            label="Descrição"
-            v-model="descricao"
-            class="w-full"
-            name="descricao"
-            v-validate="'required'"
-            :danger="errors.has('descricao')"
-            :danger-text="errors.first('descricao')"
-          />
-        </vs-col>
+      <vs-col vs-lg="12" class="px-2 pt-2">
+        <vs-input
+          label="Descrição"
+          v-model="descricao"
+          class="w-full"
+          name="descricao"
+          v-validate="'required'"
+          :danger="errors.has('descricao')"
+          :danger-text="errors.first('descricao')"
+        />
+      </vs-col>
 
-        <vs-col vs-lg="6" vs-sm="12" class="px-2 pt-2">
-          <vs-input
-            label="Valor"
-            v-model="valor"
-            class="w-full"
-            name="valor"
-            v-validate="'required'"
-            :danger="errors.has('valor')"
-            :danger-text="errors.first('valor')"
-          />
-        </vs-col>
-      
+      <vs-col vs-lg="12" class="px-2 pt-2">
+        <vs-input
+          label="Valor"
+          v-model="valor"
+          class="w-full"
+          name="valor"
+          v-validate="'required'"
+          :danger="errors.has('valor')"
+          :danger-text="errors.first('valor')"
+        />
+      </vs-col>
 
-      <vs-row vs-type="flex" vs-justify="flex-end" class="mt-6 pb-4 pr-2">
-        <vs-button v-if="!id" @click="validar" class="font-semibold">Cadastrar</vs-button>
+      <vs-row vs-type="flex" vs-justify="flex-end" class="pt-8 px-2">
+        <vs-button v-if="!id" @click="validar" class="font-semibold w-full">Cadastrar</vs-button>
 
-        <vs-button v-if="id" @click="validar" class="font-semibold" type="filled">Editar</vs-button>
+        <vs-button v-if="id" @click="validar" class="font-semibold w-full" type="filled">Editar</vs-button>
       </vs-row>
     </div>
-
   </vs-sidebar>
 </template>
 
@@ -57,10 +55,7 @@ import utils from "@/assets/utils";
 import api_receita from "@/api/api_receita";
 import api_despesa from "@/api/api_despesa";
 
-import {
-  number_format,
-  remover_virgulaERS
-} from "@/assets/utils/mask";
+import { number_format, remover_virgulaERS } from "@/assets/utils/mask";
 
 const dict = {
   custom: {
@@ -99,10 +94,8 @@ export default {
     return {
       titulo: "",
 
-      receitaDespesa:{
-        descricao: null,
-        valor: null
-      }
+      descricao: null,
+      valor: null,
     };
   },
 
@@ -111,7 +104,7 @@ export default {
     else this.titulo += "Cadastrar ";
 
     if (this.isDespesa) this.titulo += "despesa";
-    else if(this.isReceita) this.titulo += "receita";
+    else if (this.isReceita) this.titulo += "receita";
   },
 
   computed: {
@@ -129,13 +122,116 @@ export default {
   },
 
   methods: {
-    initValues() {},
+    async validar() {
+      var invalido = 0;
+
+      var result = await utils.validar(this.$validator);
+      if (!result) invalido++;
+
+      if (invalido == 0) {
+        this.submit();
+      } else {
+        this.$vs.notify({
+          color: "danger",
+          title: "Erro",
+          text: "Algum dos campos está com erro, verifique e tente novamente",
+        });
+      }
+    },
+
+    submit() {
+      debugger;
+      this.$vs.loading();
+
+      var receitaDespesa = {
+        id: this.id,
+        descricao: this.descricao,
+        valor: parseFloat(remover_virgulaERS(this.valor)),
+      };
+
+      var receitaOuDespesa = null;
+      var api = null;
+
+      if (this.isDespesa) {
+        api = api_despesa;
+        receitaOuDespesa = "Despesa";
+      } else if (this.isReceita) {
+        api = api_receita;
+        receitaOuDespesa = "Receita";
+      }
+
+      if (!this.id) this.post(api, receitaDespesa, receitaOuDespesa);
+      else this.put(api, receitaDespesa, receitaOuDespesa);
+    },
+
+    post(api, data, receitaOuDespesa) {
+      api
+        .post(data)
+        .then(() => {
+          this.$vs.loading.close();
+
+          this.$vs.notify({
+            color: "success",
+            title: `Cadastro ${receitaOuDespesa}`,
+            text: `${receitaOuDespesa} editada com sucesso!`,
+          });
+
+          this.$router.push({ name: "conta-lista" });
+        })
+        .catch((error) => {
+          var exception = utils.getError(error);
+          this.$vs.loading.close();
+
+          this.$vs.notify({
+            color: "danger",
+            title: `Erro ao cadastrar ${receitaOuDespesa}`,
+            text: exception,
+          });
+        });
+    },
+
+    put(api, data, receitaOuDespesa) {
+      api
+        .put(data, this.id)
+        .then(() => {
+          this.$vs.loading.close();
+
+          this.$vs.notify({
+            color: "success",
+            title: `Edição ${receitaOuDespesa}`,
+            text: `${receitaOuDespesa} editada com sucesso!`,
+          });
+          this.$router.push({ name: "conta-lista" });
+        })
+        .catch((error) => {
+          var exception = utils.getError(error);
+          this.$vs.loading.close();
+          this.$vs.notify({
+            color: "danger",
+            title: `Erro ao editar ${receitaOuDespesa}`,
+            text: exception,
+          });
+        });
+    },
+
+    initValues() {
+      this.descricao = "";
+      this.valor = "";
+    },
+  },
+
+   watch: {
+    valor() {
+      if (this.valor) {
+        this.valor = number_format(this.valor);
+      }
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.text-center{
+.text-center {
   text-align: center;
 }
 </style>
