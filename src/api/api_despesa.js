@@ -1,15 +1,11 @@
 import apiUtils from "./api_utils.js";
 
 export default {   
-    getAll() {
-        return apiUtils.get("wallet");
+    getAllByConta(idConta) {
+        return apiUtils.get(`expense?idWallet=${idConta}`);
     },
 
-    post(conta){
-        return apiUtils.post("wallet", conta);
-    },
-
-    put(conta, id){
-        return apiUtils.put("wallet", conta, id);
+    post(despesa){
+        return apiUtils.post("expense", despesa);
     }
 };
