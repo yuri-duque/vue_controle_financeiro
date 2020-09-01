@@ -173,7 +173,8 @@ export default {
             text: `${receitaOuDespesa} editada com sucesso!`,
           });
 
-          this.$router.push({ name: "conta-lista" });
+          this.initValues();
+          this.$emit("closeSidebar");
         })
         .catch((error) => {
           var exception = utils.getError(error);
