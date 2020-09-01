@@ -36,6 +36,7 @@
       :isSidebarActive="formReceitaDespesaActive"
       :isDespesa="isDespesa"
       :isReceita="isReceita"
+      :idConta="id"
       @closeSidebar="formReceitaDespesaActive = false"
       v-if="formReceitaDespesaActive"
     />
