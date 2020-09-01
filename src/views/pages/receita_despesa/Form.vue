@@ -41,9 +41,7 @@
       </vs-col>
 
       <vs-row vs-type="flex" vs-justify="flex-end" class="pt-8 px-2">
-        <vs-button v-if="!id" @click="validar" class="font-semibold w-full">Cadastrar</vs-button>
-
-        <vs-button v-if="id" @click="validar" class="font-semibold w-full" type="filled">Editar</vs-button>
+        <vs-button @click="validar" class="font-semibold w-full">Cadastrar</vs-button>
       </vs-row>
     </div>
   </vs-sidebar>
@@ -77,7 +75,11 @@ export default {
       type: Boolean,
       required: true,
     },
-    id: null,
+
+    idConta: {
+      type: Number,
+      required: true,
+    },
 
     isDespesa: {
       type: Boolean,
@@ -100,11 +102,8 @@ export default {
   },
 
   mounted() {
-    if (this.id) this.titulo += "Editar ";
-    else this.titulo += "Cadastrar ";
-
-    if (this.isDespesa) this.titulo += "despesa";
-    else if (this.isReceita) this.titulo += "receita";
+    if (this.isDespesa) this.titulo += "Cadastrar despesa";
+    else if (this.isReceita) this.titulo += "Cadastrar receita";
   },
 
   computed: {
@@ -140,13 +139,12 @@ export default {
     },
 
     submit() {
-      debugger;
       this.$vs.loading();
 
       var receitaDespesa = {
-        id: this.id,
-        descricao: this.descricao,
-        valor: parseFloat(remover_virgulaERS(this.valor)),
+        description: this.descricao,
+        value: parseFloat(remover_virgulaERS(this.valor)),
+        idWallet: this.idConta
       };
 
       var receitaOuDespesa = null;
@@ -160,8 +158,7 @@ export default {
         receitaOuDespesa = "Receita";
       }
 
-      if (!this.id) this.post(api, receitaDespesa, receitaOuDespesa);
-      else this.put(api, receitaDespesa, receitaOuDespesa);
+      this.post(api, receitaDespesa, receitaOuDespesa);
     },
 
     post(api, data, receitaOuDespesa) {
@@ -185,30 +182,6 @@ export default {
           this.$vs.notify({
             color: "danger",
             title: `Erro ao cadastrar ${receitaOuDespesa}`,
-            text: exception,
-          });
-        });
-    },
-
-    put(api, data, receitaOuDespesa) {
-      api
-        .put(data, this.id)
-        .then(() => {
-          this.$vs.loading.close();
-
-          this.$vs.notify({
-            color: "success",
-            title: `Edição ${receitaOuDespesa}`,
-            text: `${receitaOuDespesa} editada com sucesso!`,
-          });
-          this.$router.push({ name: "conta-lista" });
-        })
-        .catch((error) => {
-          var exception = utils.getError(error);
-          this.$vs.loading.close();
-          this.$vs.notify({
-            color: "danger",
-            title: `Erro ao editar ${receitaOuDespesa}`,
             text: exception,
           });
         });
