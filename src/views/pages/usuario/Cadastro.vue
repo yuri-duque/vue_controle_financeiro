@@ -162,7 +162,7 @@ export default {
             text: "Usuário cadastrado com sucesso!",
           });
 
-          this.$router.push({ name: "login" });
+          this.$router.push({ name: "usuario-login" });
         })
         .catch((error) => {
           var exception = utils.getError(error);
