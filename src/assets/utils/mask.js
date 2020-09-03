@@ -82,6 +82,10 @@ function number_format(value) {
 }
 
 function remover_virgulaERS(text) {
+    if (text && text.includes(".")) {
+        text = text.replace(".", "");
+    }
+
     if (text && text.includes(",")) {
         text = text.replace(",", ".");
     }

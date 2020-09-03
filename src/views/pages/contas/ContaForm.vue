@@ -99,10 +99,12 @@ export default {
     submit() {
       this.$vs.loading();
 
+      var valor = remover_virgulaERS(this.valorInicial)
+
       var conta = {
         id: this.id ? this.id : 0,
         name: this.nome,
-        balance: parseFloat(remover_virgulaERS(this.valorInicial)),
+        balance: parseFloat(valor),
       };
 
       if (!this.id) {
